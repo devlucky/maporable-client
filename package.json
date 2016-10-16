@@ -22,6 +22,7 @@
   "homepage": "https://github.com/devlucky/maporable-client#readme",
   "devDependencies": {
     "browserify": "^13.1.0",
+    "kakapo": "^0.2.1",
     "node-sass": "^3.10.1",
     "npm-run-all": "^3.1.1",
     "serve": "^1.4.0",

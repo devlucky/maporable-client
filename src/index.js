@@ -1,20 +1,35 @@
-// const topojson = require('topojson');
-// const d3 = require('d3');
-const Datamap = require('datamaps');
+require('./kakapo-config');
 
-const map = new Datamap({
-  element: document.getElementById('map-container'),
-  done(datamap) {
-    datamap.svg.selectAll('.datamaps-subunit').on('click', geography => {
-      const id = geography.id;
-      const name = geography.properties.name;
+const Map = require('./map');
+const fillKeyForStatus = status => {
+  return {
+    done: 'visited',
+    pending: 'future'
+  }[status];
+};
+const initializeMap = () => {
+  fetch('/trips').then(r => r.json()).then(response => {
+    const data = response.trips.reduce((prev, current) => {
+      if (!prev[current.country]) {
+        prev[current.country] = {
+          fillKey: fillKeyForStatus(current.status)
+        };
+      }
 
-      console.log(id, name);
+      return prev;
+    }, {});
+
+    const map = new Map({
+      element: document.getElementById('map-container'),
+      data
     });
-  }
-  // responsive: true
-});
 
-window.addEventListener('resize', () => {
-  map.resize();
-});
+    map.render();
+  });
+};
+
+initializeMap();
+
+// window.addEventListener('resize', () => {
+//   map.resize();
+// });
