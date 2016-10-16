@@ -1,0 +1,35 @@
+{
+  "name": "maporable-client",
+  "version": "0.1.0",
+  "description": "Maporable client",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "npm-run-all --parallel serve watch styles",
+    "watch": "watchify src/index.js -o dist/bundle.js -v",
+    "serve": "serve",
+    "styles": "node-sass src/styles/app.scss dist/app.css -w",
+    "release": "npm version patch && npm publish && git push --tags && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devlucky/maporable-client.git"
+  },
+  "author": "Devlucky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/devlucky/maporable-client/issues"
+  },
+  "homepage": "https://github.com/devlucky/maporable-client#readme",
+  "devDependencies": {
+    "browserify": "^13.1.0",
+    "node-sass": "^3.10.1",
+    "npm-run-all": "^3.1.1",
+    "serve": "^1.4.0",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "d3": "^4.2.7",
+    "datamaps": "^0.5.8",
+    "topojson": "^1.6.27"
+  }
+}
